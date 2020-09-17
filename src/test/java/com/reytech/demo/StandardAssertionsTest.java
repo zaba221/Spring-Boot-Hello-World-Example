@@ -13,7 +13,7 @@ import com.reytech.demo.Personne;
 
 class StandardAssertionsTest {
 
-	@DisplayName("Tests standards")
+    @DisplayName("Tests standards")
     @Test
     void standardAssertions() {
     	
@@ -31,7 +31,7 @@ class StandardAssertionsTest {
         Personne pers = new Personne("Nassur", "Moumadi");
 
         assertAll("personne", () -> assertEquals("Nassur", pers.getFirstName()),
-                              () -> assertEquals("Moumadii", pers.getLastName()));
+                              () -> assertEquals("Moumadi", pers.getLastName()));
     }
 
 
