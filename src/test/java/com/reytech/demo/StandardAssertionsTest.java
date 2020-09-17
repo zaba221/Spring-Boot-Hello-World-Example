@@ -1,4 +1,4 @@
-package com.reyetech.demo;
+package com.reytech.demo;
 
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -9,7 +9,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import com.formation.model.Personne;
+import com.reytech.demo.Personne;
 
 class StandardAssertionsTest {
 
