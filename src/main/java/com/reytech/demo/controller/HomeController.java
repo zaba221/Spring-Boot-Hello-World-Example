@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class HomeController {
 
     /**
-    * methode qui dit bonjour
-    * @return string
+    * This is a method say hello
+    * @return message string
     */
     @GetMapping("/")
     public String hello(){
@@ -17,8 +17,8 @@ public class HomeController {
     }
 
     /**
-    * @param prend un model
-    * @return string
+    * @param model is a model map
+    * @return message string
     */
     @GetMapping("/message")
     public String message(Model model) {
