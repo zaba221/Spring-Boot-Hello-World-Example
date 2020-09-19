@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class HomeController {
 
     /**
-    * This is a method say hello
+    * This is a method say hello.
     * @return message string
     */
     @GetMapping("/")
