@@ -7,11 +7,19 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class HomeController {
 
+    /**
+    * methode qui dit bonjour
+    * @return string
+    */
     @GetMapping("/")
     public String hello(){
         return "hello";
     }
 
+    /**
+    * @param prend un model
+    * @return string
+    */
     @GetMapping("/message")
     public String message(Model model) {
         model.addAttribute("message", "This is a custom message.");
