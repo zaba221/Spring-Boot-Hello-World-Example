@@ -11,7 +11,7 @@ public class HomeController {
     * This is a method say hello.
     * @return message string
     */
-    @GetMapping("/")
+    @GetMapping("/") 
     public String hello(){
         return "hello";
     }
