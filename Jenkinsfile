@@ -65,13 +65,13 @@ pipeline {
         }       
         stage('Quality Analysis Sonarqube') {
             environment {
-                SCANNER_HOME = tool 'sonarqube'
+                SCANNER_HOME = tool 'SonarQube Scanner'
                 ORGANIZATION = "EQL"
                 PROJECT_NAME = "SpringBootProject_PipelineCode"
             }
             steps {
                 withSonarQubeEnv('sonarqube') {
-                    sh ''''mvn sonar:sonar' \
+                    sh '''$SCANNER_HOME/bin/sonar-scanner \
                     -Dsonar.java.sources=src \
                     -Dsonar.java.binaries=target \
                     -Dsonar.projectKey=$PROJECT_NAME \
