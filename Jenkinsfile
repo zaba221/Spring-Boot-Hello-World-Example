@@ -79,10 +79,6 @@ pipeline {
                     -Dsonar.sourceEncoding=UTF-8'''
                 }
             }
-    }
-  }
-
-        
-        
+        }     
     }
 }
