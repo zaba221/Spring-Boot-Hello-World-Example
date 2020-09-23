@@ -46,13 +46,12 @@ pipeline {
         stage('Sanity check') {
           steps {
             echo "-=- Sanity Check Test project -=-"
-            sh 'mvn --batch-mode checkstyle:checkstyle pmd:pmd findbugs:findbugs'
+            sh 'mvn --batch-mode checkstyle:checkstyle pmd:pmd'
           }
           post {
             always {
               recordIssues enabledForFailure: true, tools: [checkStyle()]
               recordIssues enabledForFailure: true, tool: pmdParser(pattern: '**/target/pmd.xml')
-              recordIssues enabledForFailure: true, tool: [$class: 'FindBugs'], pattern: '**/target/findbugsXml.xml'
             }
           }
         }		
