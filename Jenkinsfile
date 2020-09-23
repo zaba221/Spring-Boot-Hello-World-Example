@@ -71,7 +71,7 @@ pipeline {
             }
             steps {
                 withSonarQubeEnv('sonarqube') {
-                    sh '''$SCANNER_HOME/bin/sonar-scanner \
+                    sh 'mvn sonar:sonar' \
                     -Dsonar.java.sources=src \
                     -Dsonar.java.binaries=target \
                     -Dsonar.projectKey=$PROJECT_NAME \
