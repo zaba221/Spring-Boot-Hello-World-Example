@@ -139,11 +139,11 @@ pipeline {
                            chmod +x driver/chromedriver; mvn clean verify; 
                         """
                         echo "Publishing Junit Results"
-                        junit "**/target/surefire-reports/junitreports/*.xml"
+                        junit "target/surefire-reports/*.xml"
 
                     } catch (err) { 
                         echo "Archiving Screenshot of the Failed Tests"
-                        junit "**/target/surefire-reports/junitreports/*.xml"
+                        junit "target/surefire-reports/*.xml"
                     }
                     }   
                 }
