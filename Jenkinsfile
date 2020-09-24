@@ -136,7 +136,7 @@ pipeline {
                 script {
                     try {
                         sh """
-                            mvn clean test
+                           chmod +x driver/chromedriver; mvn clean verify; 
                         """
                         echo "Publishing Junit Results"
                         junit "**/target/surefire-reports/junitreports/*.xml"
