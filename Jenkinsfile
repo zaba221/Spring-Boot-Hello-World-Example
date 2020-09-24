@@ -86,8 +86,8 @@ pipeline {
                sourceFiles: "target/*.jar",
                removePrefix: "/target",
                remoteDirectory: "",
-               sh '''sudo mv demo-0.0.1-SNAPSHOT.jar /home/vagrant/project;
-                cd project;
+               sh "sudo mv demo-0.0.1-SNAPSHOT.jar /home/vagrant/project"
+               sh "cd project"
                 sudo docker build -t springbootapp1 . ;
                 docker tag springbootapp1 babsmbaye/springbootapp1:1.0
                 docker push babsmbaye/springbootapp1:1.0 '''
