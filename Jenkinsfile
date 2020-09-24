@@ -72,7 +72,6 @@ pipeline {
                 }
             }
         }
-        
         stage('Continuous delivery') {
           steps {
              script {
@@ -99,6 +98,33 @@ pipeline {
              }
           }
         }
+        stage('Continuous delivery') {
+          steps {
+             script {
+              sshPublisher(
+               continueOnError: false, failOnError: true,
+               publishers: [
+                sshPublisherDesc(
+                 configName: "docker-host",
+                 verbose: true,
+                 transfers: [
+                  sshTransfer(
+                   sourceFiles: "target/*.jar",
+                   removePrefix: "/target",
+                   remoteDirectory: "",
+                   execCommand: """
+                    sudo docker stop $(docker ps -a -q);
+                    sudo docker rm $(docker ps -a -q);
+                    sudo docker run -d -p 8080:8080 babsmbaye/springbootapp1:1.0;
+                  )
+                 ])
+               ])
+             }
+          }
+        }
+        
+        
+
 
     }
 }
