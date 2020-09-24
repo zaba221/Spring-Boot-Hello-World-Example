@@ -129,26 +129,10 @@ pipeline {
                 git url: 'https://github.com/zaba221/example-springboot-automation-test-selenium.git'
             }
         }
-        stage("Selenium Test") {
-        steps {
-            script {
-                // -- Script to launch Appium Test
-                script {
-                    try {
-                        sh """
-                           chmod +x driver/chromedriver; mvn clean verify; 
-                        """
-                        echo "Publishing Junit Results"
-                        junit "target/surefire-reports/*.xml"
-
-                    } catch (err) { 
-                        echo "Archiving Screenshot of the Failed Tests"
-                        junit "target/surefire-reports/*.xml"
-                    }
-                    }   
-                }
+        stage('Selenium Test Job') {
+            steps {
+                 build job: 'projet-selenium' 
             }
         }
-
     }
 }
