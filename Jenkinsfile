@@ -32,23 +32,6 @@ pipeline {
                     junit 'target/surefire-reports/*.xml'
                 }
             }
-        }
-        stage('Quality Analysis Sonarqube') {
-            environment {
-                SCANNER_HOME = tool 'SonarQubeScanner'
-                ORGANIZATION = "EQL"
-                PROJECT_NAME = "SpringBootProject_1"
-            }
-            steps {
-                withSonarQubeEnv('sonarqube') {
-                    sh '''$SCANNER_HOME/bin/sonar-scanner \
-                    -Dsonar.java.sources=src \
-                    -Dsonar.java.binaries=target \
-                    -Dsonar.projectKey=java-sonar-runner-simple \
-                    -Dsonar.language=java \
-                    -Dsonar.sourceEncoding=UTF-8'''
-                }
-            }
         }     
         stage('Code coverage') {
             steps {
@@ -71,6 +54,23 @@ pipeline {
               recordIssues enabledForFailure: true, tool: pmdParser(pattern: '**/target/pmd.xml')
             }
           }
-        }		       
+        }	
+        stage('Quality Analysis Sonarqube') {
+            environment {
+                SCANNER_HOME = tool 'SonarQubeScanner'
+                ORGANIZATION = "EQL"
+                PROJECT_NAME = "SpringBootProject_1"
+            }
+            steps {
+                withSonarQubeEnv('sonarqube') {
+                    sh '''$SCANNER_HOME/bin/sonar-scanner \
+                    -Dsonar.java.sources=/var/lib/jenkins/workspace/Pipeline_As_A_Code/src \
+                    -Dsonar.java.binaries=target \
+                    -Dsonar.projectKey=java-sonar-runner-simple \
+                    -Dsonar.language=java \
+                    -Dsonar.sourceEncoding=UTF-8'''
+                }
+            }
+        }
     }
 }
