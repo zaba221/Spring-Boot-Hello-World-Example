@@ -123,11 +123,34 @@ pipeline {
              }
           }
         }
-        stage('Selenium') {
+       stage('Checkout Selenium') {
             steps {
-                 build job: 'projet-selenium' 
+                echo "-=- Checkout project -=-"
+                git url: 'https://github.com/zaba221/example-springboot-automation-test-selenium.git'
             }
         }
-       
+        stage("Selenium Test") {
+        steps {
+            script {
+                // -- Script to launch Appium Test
+                script {
+                    try {
+                        sh """
+                            mvn clean test
+                        """
+                        echo "Publishing Junit Results"
+                        junit "**/target/surefire-reports/junitreports/*.xml"
+
+                    } catch (err) { 
+                        echo "Archiving Screenshot of the Failed Tests"
+                        archiveArtifacts "**/screenshot/*.png"
+                        echo "Publishing Junit Results"
+                        junit "**/target/surefire-reports/junitreports/*.xml"
+                    }
+                    }   
+                }
+            }
+        }
+
     }
 }
