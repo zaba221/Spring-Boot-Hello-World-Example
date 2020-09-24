@@ -33,6 +33,23 @@ pipeline {
                 }
             }
         }
+        stage('Quality Analysis Sonarqube') {
+            environment {
+                SCANNER_HOME = tool 'SonarQubeScanner'
+                ORGANIZATION = "EQL"
+                PROJECT_NAME = "SpringBootProject_1"
+            }
+            steps {
+                withSonarQubeEnv('sonarqube') {
+                    sh '''$SCANNER_HOME/bin/sonar-scanner \
+                    -Dsonar.java.sources=src \
+                    -Dsonar.java.binaries=target \
+                    -Dsonar.projectKey=java-sonar-runner-simple \
+                    -Dsonar.language=java \
+                    -Dsonar.sourceEncoding=UTF-8'''
+                }
+            }
+        }     
         stage('Code coverage') {
             steps {
                 jacoco( 
@@ -54,31 +71,6 @@ pipeline {
               recordIssues enabledForFailure: true, tool: pmdParser(pattern: '**/target/pmd.xml')
             }
           }
-        }		
-        stage('SonarQube Report') {
-            steps {
-              echo "-=- Running analyse with sonar -=-"
-              withSonarQubeEnv('sonarqube') {
-                sh 'mvn sonar:sonar'
-              }
-            }
-        }       
-        stage('Quality Analysis Sonarqube') {
-            environment {
-                SCANNER_HOME = tool 'SonarQube Scanner'
-                ORGANIZATION = "EQL"
-                PROJECT_NAME = "SpringBootProject"
-            }
-            steps {
-                withSonarQubeEnv('sonarqube') {
-                    sh '''$SCANNER_HOME/bin/sonar-scanner \
-                    -Dsonar.java.sources=src \
-                    -Dsonar.java.binaries=target \
-                    -Dsonar.projectKey=java-sonar-runner-simple \
-                    -Dsonar.language=java \
-                    -Dsonar.sourceEncoding=UTF-8'''
-                }
-            }
-        }     
+        }		       
     }
 }
