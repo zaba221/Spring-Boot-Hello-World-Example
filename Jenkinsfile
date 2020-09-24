@@ -74,7 +74,7 @@ pipeline {
                     sh '''$SCANNER_HOME/bin/sonar-scanner \
                     -Dsonar.java.sources=src \
                     -Dsonar.java.binaries=target \
-                    -Dsonar.projectKey=$PROJECT_NAME \
+                    -Dsonar.projectKey=java-sonar-runner-simple \
                     -Dsonar.language=java \
                     -Dsonar.sourceEncoding=UTF-8'''
                 }
