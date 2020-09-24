@@ -143,8 +143,6 @@ pipeline {
 
                     } catch (err) { 
                         echo "Archiving Screenshot of the Failed Tests"
-                        archiveArtifacts "**/screenshot/*.png"
-                        echo "Publishing Junit Results"
                         junit "**/target/surefire-reports/junitreports/*.xml"
                     }
                     }   
