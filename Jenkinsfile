@@ -66,7 +66,7 @@ pipeline {
                     sh '''$SCANNER_HOME/bin/sonar-scanner \
                     -Dsonar.java.sources=/var/lib/jenkins/workspace/Pipeline_As_A_Code/src \
                     -Dsonar.java.binaries=target \
-                    -Dsonar.projectKey=java-sonar-runner-simple \
+                    -Dsonar.projectKey=$PROJECT_NAME \
                     -Dsonar.language=java \
                     -Dsonar.sourceEncoding=UTF-8'''
                 }
