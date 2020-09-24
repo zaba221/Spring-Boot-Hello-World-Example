@@ -46,7 +46,7 @@ pipeline {
         stage('Sanity check') {
           steps {
             echo "-=- Sanity Check Test project -=-"
-            sh 'mvn --batch-mode checkstyle:checkstyle pmd:pmd'
+            sh 'mvn clean install checkstyle:checkstyle pmd:pmd'
           }
           post {
             always {
