@@ -74,28 +74,30 @@ pipeline {
         }
         
         stage('Continuous delivery') {
-         script {
-          sshPublisher(
-           continueOnError: false, failOnError: true,
-           publishers: [
-            sshPublisherDesc(
-             configName: "docker-host",
-             verbose: true,
-             transfers: [
-              sshTransfer(
-               sourceFiles: "target/*.jar",
-               removePrefix: "/target",
-               remoteDirectory: "",
-               execCommand: """
-                sudo mv demo-0.0.1-SNAPSHOT.jar /home/vagrant/project;
-                cd project;
-                sudo docker build -t springbootapp . ;
-                docker tag springbootapp babsmbaye/springbootapp:1.0
-                docker push babsmbaye/springbootapp:1.0 """
-              )
-             ])
-           ])
-         }
+          steps {
+             script {
+              sshPublisher(
+               continueOnError: false, failOnError: true,
+               publishers: [
+                sshPublisherDesc(
+                 configName: "docker-host",
+                 verbose: true,
+                 transfers: [
+                  sshTransfer(
+                   sourceFiles: "target/*.jar",
+                   removePrefix: "/target",
+                   remoteDirectory: "",
+                   execCommand: """
+                    sudo mv demo-0.0.1-SNAPSHOT.jar /home/vagrant/project;
+                    cd project;
+                    sudo docker build -t springbootapp . ;
+                    docker tag springbootapp babsmbaye/springbootapp:1.0
+                    docker push babsmbaye/springbootapp:1.0 """
+                  )
+                 ])
+               ])
+             }
+          }
         }
 
     }
