@@ -98,7 +98,7 @@ pipeline {
              }
           }
         }
-        stage('Continuous delivery') {
+        stage('Continuous deployment') {
           steps {
              script {
               sshPublisher(
