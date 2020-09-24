@@ -123,5 +123,11 @@ pipeline {
              }
           }
         }
+        stage('Selenium') {
+            steps {
+                 build job: 'RunArtInTest'
+            }
+        }
+       
     }
 }
